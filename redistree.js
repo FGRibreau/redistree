@@ -18,22 +18,22 @@ RedisTree.prototype._getItem = function(label, f) {
   this.members(label, function(err, cards){
     var item = {
       label: this.label(label),
-      parents: []
+      childrens: []
     };
     parent.push(item);
 
     if(cards.length === 0){return f(null, parent);}
-    async.map(cards, _.partialRight(this._getItem.bind(this), item.parents), function(e){f(e, parent);});
+    async.map(cards, _.partialRight(this._getItem.bind(this), item.childrens), function(e){f(e, parent);});
   }.bind(this));
 };
 
 RedisTree.prototype._saveItem = function(item, f) {
-  var labels = _.pluck(item.parents, 'label');
+  var labels = _.pluck(item.childrens, 'label');
   if(labels.length === 0){return f();}
 
   this.addMembers(item.label, labels, function(err){
     if(err){return f(err);}
-    this._saveItems(item.parents, f);
+    this._saveItems(item.childrens, f);
   }.bind(this));
 };
 
@@ -61,7 +61,6 @@ RedisTree.prototype.label = function(label){return label;};
  * @param {String} label
  */
 RedisTree.prototype.members = function(label, f) {
-  console.log('smembers '+label);
   this.redis.smembers(label, f);
 };
 

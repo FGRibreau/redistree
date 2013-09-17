@@ -3,14 +3,14 @@
  */
 module.exports = [{
   label: 'label1',
-  parents: [{
+  childrens: [{
     label: 'label2',
-    parents: [{
+    childrens: [{
       label: 'label4',
-      parents: []
+      childrens: []
     }]
   }, {
     label: 'label3',
-    parents: []
+    childrens: []
   }]
 }];
