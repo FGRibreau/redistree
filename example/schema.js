@@ -1,6 +1,5 @@
 /**
- * Tree format
- * @type {[type]}
+ * Tree format (sample)
  */
 module.exports = [{
   label: 'label1',

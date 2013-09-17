@@ -13,7 +13,7 @@ function RedisTree(redisClient){this.redis = redisClient;}
  * @param  {Function} f(err, arrayOfItems)
  */
 RedisTree.prototype._getItem = function(label, f) {
-  var parent = _.isArray(_.last(arguments)) ? _.last(arguments) : [];
+  var parent = _.isArray(_.last(arguments)) ? _.last(arguments) : [];
 
   this.members(label, function(err, cards){
     var item = {
@@ -61,6 +61,7 @@ RedisTree.prototype.label = function(label){return label;};
  * @param {String} label
  */
 RedisTree.prototype.members = function(label, f) {
+  console.log('smembers '+label);
   this.redis.smembers(label, f);
 };
 
@@ -73,6 +74,7 @@ RedisTree.prototype.members = function(label, f) {
 RedisTree.prototype.addMembers = function(label, labels, f) {
   this.redis.sadd(label, labels, f);
 };
+
 /**
  * Load a tree from Redis
  * @param  {String} startLabel Were to start
