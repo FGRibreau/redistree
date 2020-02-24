@@ -14,7 +14,7 @@
     "url": "https://github.com/FGRibreau/redistree/issues"
   },
   "dependencies": {
-    "async": "~0.2.9",
+    "async": "~3.2.0",
     "lodash": "~2.0.0"
   },
   "devDependencies": {
